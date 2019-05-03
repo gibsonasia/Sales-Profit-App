@@ -1,0 +1,72 @@
+using System;
+using static System.Console;
+
+namespace SalesProfitApp
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            decimal sales, profitRatio, profit;
+            sales = GetInput();
+            profitRatio = GetProfitRatioRate(sales);
+            profit = CalcProfit(sales, profitRatio);
+            DispplayResults(sales, profit, profitRatio);
+
+            ReadKey();
+        }
+
+        public static void DispplayResults(decimal s, decimal p, decimal pr)
+        {
+            Clear();
+            if (p == 0)
+            {
+                WriteLine("unacceptable input");
+
+            }
+            else
+            {
+                Write("\tSales Profit App\n");
+                WriteLine("\nSales: {0:C} \nProfit Ratio: {1:P} \nNet Profit: {2:C}", s, pr, p);
+            }
+        }
+
+        public static decimal GetInput()
+        {
+            decimal gross;
+            Write("Please enter your sales amount: ");
+            gross = decimal.Parse(ReadLine());
+            return gross;
+        }
+
+        public static decimal GetProfitRatioRate(decimal sales)
+        {
+            decimal rate;
+
+            if (sales > 10000) {
+                rate = 0.045m;
+
+            }else if (sales > 5000) {
+                rate = 0.04m;
+
+            }else if (sales > 1000) {
+                rate = 0.035m;
+
+            }else if (sales > 0) {
+                rate = 0.03m;
+
+            }
+            else
+            {
+                rate = 0m;
+            }
+
+            return rate;
+        }
+
+        public static decimal CalcProfit(decimal grosspay, decimal rate)
+        {
+            return grosspay * rate;
+        }
+    }
+}
